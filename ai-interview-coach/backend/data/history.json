@@ -1,0 +1,84 @@
+[
+  {
+    "session_id": "7ea1f4ac-be36-47cf-869a-b265664068ab",
+    "client_id": "40b0ee6c-5637-49ff-a3f4-ea48a76a5592",
+    "completed_at": "2026-07-09T09:27:55.232685+00:00",
+    "resume_summary": "Ansh Chauhan is a motivated B Tech Computer Science student with strong foundations in Data Structures and Algorithms, and hands-on experience in full stack web development with React.js, Node.js, and Express.js. He has experience in building scalable, API-driven web applications and integrating third-party services. He also has experience in AI, ML, and GenAI, including NLP, Generative AI, and RAG.",
+    "jd_summary": "The Full Stack Intern role requires a candidate with experience in full stack web development, API integration, and third-party services. The candidate should be skilled in building scalable web applications and have experience with tools like Git, GitHub, Postman, and VS Code. The role also involves working in a team, resolving conflicts, and making decisions.",
+    "qa_log": [
+      {
+        "round": "behavioral",
+        "question": "Tell me about a time when you had to integrate a third-party API into a web application, and how you handled any challenges that arose during the integration process.",
+        "answer": "One example was when I built an AI-powered chatbot that used the Google Gemini API to answer user queries. The backend was built with FastAPI, and the frontend was developed in React. My responsibility was to integrate the LLM API and ensure the application could generate accurate responses reliably.\n\nOne of the first challenges was handling API failures and network issues. Since external APIs can occasionally timeout or return errors, I added proper exception handling, retry logic with exponential backoff for transient failures, and meaningful error messages so the application could fail gracefully instead of crashing.\n\nAnother challenge was managing response time and API costs. Initially, every user query resulted in a new API call, which increased latency and token usage. To improve this, I cached responses for repeated queries, optimized the prompts to include only the necessary context, and, where appropriate, used a Retrieval-Augmented Generation (RAG) approach so the model received only relevant document snippets instead of the entire knowledge base.\n\nI also paid attention to API security by keeping the API key on the backend using environment variables rather than exposing it in the frontend. I defined clear request and response schemas using FastAPI, making the integration between the React frontend and backend predictable and easier to maintain.\n\nThe integration was successful, and the chatbot provided reliable, context-aware responses with lower latency and reduced API costs. The project taught me that integrating third-party APIs isn't just about making requests\u2014it's also about building a robust system with good error handling, security, performance optimization, and maintainable interfaces.",
+        "score": 9,
+        "feedback": "The candidate provided a specific example of integrating a third-party API into a web application, clearly explaining the challenges they faced and the solutions they implemented. The answer demonstrated strong technical skills and a thorough understanding of the integration process. However, the candidate could have further elaborated on the impact of their solutions on the project's overall success and the lessons they learned from the experience.",
+        "confidence_flags": []
+      },
+      {
+        "round": "behavioral",
+        "question": "Tell me about a time when you had to work with a team to resolve a technical conflict or disagreement on a project, and how you contributed to finding a solution.",
+        "answer": "During one of my AI chatbot projects, our team had disagreement about how the chatbot should give information. One approach was to send all available documents directly to the LLM with every request while other host to implement a global augmented generation RAG pipeline using embeddings and vector database. Instead of debating based on opinions I suggested that we should evaluate both the approaches using measurable criteria. We compared response quality latency, API token usage and overall cost by testing the same set of user queries against both implementations. The result showed that sending all documents increased response time and API cost without improving answer quality, the RAG base approach would be only the most relevant document checking, resulting in faster responses lower token usage and more accurate answers.",
+        "score": 9,
+        "feedback": "The candidate provided a specific example from their experience, clearly explaining the conflict and the approach they took to resolve it. The use of measurable criteria to evaluate both approaches demonstrated a data-driven mindset. The answer was well-structured and easy to follow, showcasing the candidate's ability to work collaboratively and make informed decisions.",
+        "confidence_flags": []
+      },
+      {
+        "round": "hr",
+        "question": "What motivates you to apply for this Full Stack Intern role, and how do you see this position aligning with your long-term career goals?",
+        "answer": "Nothing Motivates me\n",
+        "score": 1,
+        "feedback": "The candidate's answer lacks relevance, specificity, and clarity, failing to provide any motivation for applying to the Full Stack Intern role, which is a crucial aspect of the position. A more effective answer would have highlighted the candidate's passion for full stack development, relevant skills, and career aspirations. The response 'Nothing Motivates me' raises concerns about the candidate's enthusiasm and commitment to the role.",
+        "confidence_flags": [
+          "very short/vague answers",
+          "avoidance"
+        ]
+      },
+      {
+        "round": "hr",
+        "question": "What are your long-term career goals, and how do you see this Full Stack Intern role contributing to your professional growth and development?",
+        "answer": "My long-term career goal is to become a strong software engineer with expertise in full-stack development and AI-powered applications. I want to build scalable, secure, and user-focused products while continuously improving my skills in system design, cloud technologies, backend development, and modern frontend frameworks. As AI becomes an important part of software development, I also want to gain deeper experience in integrating AI capabilities into production applications.\n\nI see this Full Stack Intern role as an important step toward that goal. It will give me the opportunity to work on real-world projects, collaborate with experienced developers, and understand how production systems are designed, tested, and deployed. I'm particularly excited about learning industry best practices in areas such as clean code, code reviews, version control, debugging, and agile development.\n\nI also believe this role will help me improve my technical and professional skills by exposing me to real customer requirements, teamwork, and problem-solving in a fast-paced environment. ",
+        "score": 9,
+        "feedback": "The candidate's answer is clear, concise, and well-aligned with the role requirements, demonstrating a strong understanding of their long-term career goals and how this internship can contribute to their professional growth. The answer could benefit from more specific examples of how they plan to apply their skills and knowledge in the role. Overall, the candidate shows a strong motivation to learn and grow in the field of full-stack development and AI-powered applications.",
+        "confidence_flags": []
+      },
+      {
+        "round": "coding",
+        "question": "Write a JavaScript function that takes a JSON object representing a user's profile and returns a new object with only the fields that are relevant to a public profile, such as name, email, and profile picture. For example, given the input { id: 1, name: 'John Doe', email: 'john@example.com', profilePicture: 'https://example.com/picture.jpg', password: 'secret' }, the function should return { name: 'John Doe', email: 'john@example.com', profilePicture: 'https://example.com/picture.jpg' }. Implement this function using JavaScript and the React.js framework.",
+        "answer": "// utils/publicProfile.js\nfunction getPublicProfile(user) {\n  const { name, email, profilePicture } = user;\n\n  return {\n    name,\n    email,\n    profilePicture,\n  };\n}\n\nexport default getPublicProfile;",
+        "score": 3,
+        "feedback": "The candidate selected Python as the language for this code answer, but the provided code is written in JavaScript, which is a strict instruction-following failure. The code itself appears to be correct and relevant to the problem, but it does not match the selected language. The candidate needs to resubmit their answer in the correct language.",
+        "confidence_flags": [
+          "language mismatch"
+        ]
+      },
+      {
+        "round": "coding",
+        "question": "Write a Python function that takes a list of integers as input and returns the maximum sum of a contiguous subarray within the list. For example, given the input [1, 2, 3, -4, 5], the function should return 6, which is the sum of the subarray [1, 2, 3].",
+        "answer": "def max_subarray_sum(nums):\n    if not nums:\n        return 0\n\n    current_sum = max_sum = nums[0]\n\n    for num in nums[1:]:\n        # Either extend the current subarray or start a new one\n        current_sum = max(num, current_sum + num)\n\n        # Update the maximum sum found so far\n        max_sum = max(max_sum, current_sum)\n\n    return max_sum\n\n\n# Example usage\nnums = [1, 2, 3, -4, 5]\nprint(max_subarray_sum(nums))",
+        "score": 9,
+        "feedback": "The candidate provided a correct and efficient Python function to find the maximum sum of a contiguous subarray within a list of integers. The code is well-structured, readable, and handles edge cases properly. However, it would be beneficial to include more comments or docstrings to explain the logic and purpose of the function.",
+        "confidence_flags": []
+      }
+    ],
+    "final_report": {
+      "overall_score": 7,
+      "strengths": [
+        "strong technical skills",
+        "experience in full stack web development",
+        "ability to work collaboratively"
+      ],
+      "areas_to_improve": [
+        "communication of motivation and enthusiasm",
+        "following instructions in coding challenges",
+        "providing specific examples in answers"
+      ],
+      "round_breakdown": {
+        "behavioral": "The candidate provided strong, specific examples from their experience, demonstrating technical skills and a collaborative mindset, but could have elaborated more on the impact of their solutions.",
+        "hr": "The candidate struggled to articulate their motivation and enthusiasm for the role, but provided a clear and well-aligned answer regarding their long-term career goals.",
+        "coding": "The candidate demonstrated proficiency in coding, but failed to follow instructions in one challenge and could benefit from including more comments or docstrings in their code."
+      },
+      "confidence_assessment": "The candidate's communication style was generally clear and concise, but lacked confidence and enthusiasm in certain areas, such as when discussing their motivation for the role. They demonstrated a data-driven mindset and ability to work collaboratively, but could improve in conveying their passion for the field. Overall, the candidate's confidence and communication style were variable throughout the interview.",
+      "final_verdict": "Ansh Chauhan has demonstrated strong technical skills and experience in full stack web development, as well as a collaborative mindset and ability to work effectively in a team. However, they need to improve in communicating their motivation and enthusiasm for the role, and following instructions in coding challenges. With some development in these areas, Ansh has the potential to be a valuable asset to the team, but may require additional support and guidance to reach their full potential."
+    }
+  }
+]

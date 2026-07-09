@@ -1,0 +1,31 @@
+# Secrets and Environment Variables
+.env
+*.env
+.env.*
+
+# Python / Backend Unnecessary Files
+**/__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+**/.venv/
+**/venv/
+**/ENV/
+**/env/
+**/anaconda3/
+
+# Node / Frontend Unnecessary Files
+**/node_modules/
+**/.npm
+dist/
+dist-ssr/
+*.local
+
+# Database / Storage (ChromaDB local files)
+backend/chroma_db/
+*.db
+*.sqlite
+
+# Operating System Files
+.DS_Store
+Thumbs.db

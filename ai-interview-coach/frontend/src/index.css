@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  background-color: #12141A;
+  background-image:
+    radial-gradient(circle at 15% 10%, rgba(232, 163, 61, 0.06), transparent 40%),
+    radial-gradient(circle at 85% 90%, rgba(63, 167, 150, 0.05), transparent 40%),
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: auto, auto, 48px 48px, 48px 48px;
+  color: #EDEDEF;
+  font-family: "Inter", sans-serif;
+}
+
+.screen-enter {
+  animation: screenFadeIn 0.35s ease-out both;
+}
+
+@keyframes screenFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* CodeMirror sizing reset so it fills the editor container cleanly */
+.cm-editor {
+  font-size: 13px;
+}
+.cm-editor.cm-focused {
+  outline: none !important;
+}
+
+::selection {
+  background-color: #E8A33D;
+  color: #12141A;
+}
+
+:focus-visible {
+  outline: 2px solid #E8A33D;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
