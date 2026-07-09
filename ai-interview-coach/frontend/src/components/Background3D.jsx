@@ -1,12 +1,6 @@
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 
-/**
- * Subtle 3D scene rendered behind page content: a field of slowly rotating
- * wireframe icosahedra plus a soft particle field, with gentle mouse-driven
- * parallax on the camera. Kept intentionally understated so it reads as
- * "polished," not "distracting."
- */
 export default function Background3D() {
   const containerRef = useRef(null);
 

@@ -1,9 +1,3 @@
-"""
-Central state schema shared across every node in the LangGraph.
-LangGraph only persists keys declared here — any key a node returns
-that isn't in this schema is silently dropped from the checkpoint.
-(This was the cause of scores never showing up in the UI.)
-"""
 from typing import TypedDict, List, Optional, Literal
 
 Round = Literal["behavioral", "hr", "coding"]

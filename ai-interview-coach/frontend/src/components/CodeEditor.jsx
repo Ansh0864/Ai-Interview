@@ -12,13 +12,6 @@ export const CODE_LANGUAGES = {
   java: { label: "Java", extension: java() },
 };
 
-/**
- * Fully controlled: `language` and `onLanguageChange` come from the parent
- * so the selected language can actually be sent to the backend and
- * enforced during scoring - previously this was local-only state used
- * purely for syntax highlighting, so picking "Python" never stopped you
- * from submitting Java and having it graded as if it were fine.
- */
 export default function CodeEditor({ value, onChange, language, onLanguageChange, disabled }) {
   return (
     <div className="rounded-md overflow-hidden border border-line">

@@ -1,13 +1,3 @@
-"""
-Vector stores aren't JSON-serializable, so they can't be stored inside
-LangGraph state directly (which gets checkpointed). Instead we keep a
-simple process-local registry keyed by session_id.
-
-NOTE: this is in-memory and will not survive a server restart, and won't
-scale across multiple worker processes. For a production version, swap
-this for a persistent Chroma instance keyed by session_id on disk, or a
-hosted vector DB.
-"""
 from typing import Dict
 from langchain_community.vectorstores import Chroma
 

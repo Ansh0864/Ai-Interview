@@ -1,8 +1,3 @@
-"""
-Speech-to-text via faster-whisper, running fully locally (CPU by default).
-No API key required — this is intentional so the voice feature doesn't
-add a second paid dependency on top of the main LLM provider.
-"""
 import io
 import tempfile
 import os

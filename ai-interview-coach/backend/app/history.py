@@ -1,24 +1,3 @@
-"""
-Lightweight persistent history of completed interviews, stored as a single
-JSON file on disk (backend/data/history.json). No database needed for a
-project at this scale - just append-on-finish, read-on-list.
-
-Every record is tagged with the client_id of whoever ran that interview
-(an anonymous ID generated in the browser and stored in localStorage -
-see frontend/src/utils/clientId.js). list_summaries() and get_full_record()
-both require a client_id and only ever return records that belong to it,
-so one person can no longer see or open another person's interview
-history - previously this endpoint returned everyone's data to everyone.
-
-NOTE: this is intentionally simple (not thread-safe against true concurrent
-writers, no pagination). Fine for a small deployment; swap for a real DB
-(SQLite is the obvious next step) if this ever needs to handle heavier
-concurrent traffic. The client_id approach is NOT real authentication -
-it's a privacy-by-default anonymous identifier, not a security boundary;
-anyone who copies another person's client_id (e.g. by inspecting their
-browser storage) could still read their history. If real accounts/auth
-are ever added, replace client_id with the authenticated user's ID.
-"""
 import json
 import os
 import threading

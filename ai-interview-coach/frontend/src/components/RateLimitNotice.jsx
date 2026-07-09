@@ -1,10 +1,5 @@
 import { useState, useEffect } from "react";
 
-/**
- * Shows a live countdown when an error carries a retryAfterSeconds value
- * (from Gemini's own rate-limit response), otherwise just renders the
- * plain error message.
- */
 export default function RateLimitNotice({ error }) {
   const normalized = typeof error === "string" ? { message: error, retryAfterSeconds: null } : error;
   const [remaining, setRemaining] = useState(normalized?.retryAfterSeconds ?? null);

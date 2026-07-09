@@ -149,9 +149,7 @@ async def text_to_speech(req: TTSRequest):
     except TTSNotConfigured as e:
         raise HTTPException(503, {"reason": "not_configured", "message": str(e)})
     except TTSError as e:
-        # Use the REAL status from ElevenLabs (401/429/etc) instead of always
-        # returning 503 - previously every failure looked identical to "no
-        # key set" even when a key was present but wrong/rate-limited.
+       
         raise HTTPException(e.status_code, {"reason": "api_error", "message": str(e)})
 
 

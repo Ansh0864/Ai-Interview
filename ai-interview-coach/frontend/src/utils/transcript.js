@@ -1,12 +1,6 @@
 function formatSection(title, lines) {
   return `## ${title}\n\n${lines.join("\n")}\n`;
 }
-
-/**
- * Builds a Markdown transcript of a completed interview from the same
- * qa_log + final_report data already shown in the report screen - no
- * backend call needed, this is purely a client-side reformat.
- */
 export function buildTranscriptMarkdown({ qaLog, report, resumeSummary, jdSummary, completedAt }) {
   const parts = [`# Interview Transcript\n`];
 

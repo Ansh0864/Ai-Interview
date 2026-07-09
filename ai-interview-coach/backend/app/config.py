@@ -1,11 +1,6 @@
 import os
 from dotenv import load_dotenv
 
-# Print exactly which .env file (if any) was found, and from where - the
-# most common "key is present but doesn't work" cause is actually a file
-# that LOOKS like .env in File Explorer but is really .env.txt (Windows
-# hides known extensions by default), so python-dotenv silently finds
-# nothing and every os.getenv() below falls back to an empty string.
 _dotenv_path = load_dotenv()
 print(f"[INFO] .env loaded from: {_dotenv_path or 'NOT FOUND - check the file is really named .env, not .env.txt'}")
 

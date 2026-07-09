@@ -12,9 +12,7 @@ export default function ReportScreen() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // Two ways to land here: fresh off finishing an interview (data arrives
-  // via navigation state), or opened from the History list (only a
-  // session_id in the URL - fetch the saved record from the backend).
+  
   const [report, setReport] = useState(location.state?.report || null);
   const [qaLog, setQaLog] = useState(location.state?.qaLog || []);
   const [meta, setMeta] = useState({

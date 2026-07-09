@@ -10,11 +10,6 @@ def build_interview_graph():
     graph.add_node("start_interview", start_interview_node)
     graph.add_node("process_turn", process_turn_node)
 
-    # Conditional entry point: first call ("start") ingests docs + asks Q1.
-    # Every call after that ("turn") scores the answer and atomically
-    # produces whatever comes next (follow-up, next question, next round,
-    # or the final report) in the SAME node — see nodes.py docstring for
-    # why this matters.
     graph.set_conditional_entry_point(
         route_entry,
         {"start": "start_interview", "turn": "process_turn"},

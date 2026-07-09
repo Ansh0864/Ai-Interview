@@ -1,9 +1,5 @@
 const BAR_ANIMATIONS = ["animate-eq-1", "animate-eq-2", "animate-eq-3", "animate-eq-4", "animate-eq-5"];
 
-/**
- * mode: "speaking" (interviewer's TTS audio is playing), "listening"
- * (user is recording their voice answer), or "idle".
- */
 export default function VoiceOrb({ mode = "idle" }) {
   const active = mode !== "idle";
   const color = mode === "listening" ? "#D9776B" : "#E8A33D";

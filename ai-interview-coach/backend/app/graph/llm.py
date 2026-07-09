@@ -29,15 +29,7 @@ class RateLimitExceeded(Exception):
         super().__init__(message)
         self.retry_after_seconds = retry_after_seconds
 
-
-# --- Provider + multi-key failover --------------------------------------
-# Groq is tried first (faster, higher free-tier throughput); Gemini is an
-# optional backup tried only once every configured Groq key is exhausted.
-# CAVEAT that applies to BOTH providers: rate limits are enforced per
-# account/project, not per key - multiple keys from the SAME account only
-# help if they're each from genuinely separate accounts/projects.
-Slot = Tuple[str, int]  # (provider_name, key_index within that provider's key list)
-
+Slot = Tuple[str, int]  
 _PROVIDER_KEYS = {"groq": GROQ_API_KEYS, "gemini": GOOGLE_API_KEYS}
 _PROVIDER_MODEL = {"groq": GROQ_MODEL, "gemini": GEMINI_MODEL}
 

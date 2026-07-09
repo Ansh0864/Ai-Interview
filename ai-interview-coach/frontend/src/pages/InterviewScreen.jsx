@@ -24,18 +24,14 @@ export default function InterviewScreen() {
   const [audioUrl, setAudioUrl] = useState(null);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [needsTapToPlay, setNeedsTapToPlay] = useState(false);
-  const [ttsIssue, setTtsIssue] = useState(null); // { reason, message } | null
+  const [ttsIssue, setTtsIssue] = useState(null); 
   const audioRef = useRef(null);
 
   const isCodingRound = state?.current_round === "coding";
 
-  // Browser-native fallback voice - free and always available, used whenever
-  // ElevenLabs can't serve audio (no key set, 402 library-voice restriction,
-  // rate limit, etc). This is what keeps "the interviewer speaks" working
-  // even on a free ElevenLabs plan.
   function speakWithBrowserVoice(text) {
     if (!("speechSynthesis" in window) || !text) return;
-    window.speechSynthesis.cancel(); // stop anything mid-utterance from a prior question
+    window.speechSynthesis.cancel(); 
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.rate = 1;
     utterance.onstart = () => setIsSpeaking(true);
@@ -43,13 +39,6 @@ export default function InterviewScreen() {
     utterance.onerror = () => setIsSpeaking(false);
     window.speechSynthesis.speak(utterance);
   }
-
-  // Auto-fetch TTS whenever the question changes. If it's unavailable for
-  // any reason, ttsIssue carries the REAL cause (not configured vs. an
-  // actual ElevenLabs error like a bad key, 402 library-voice restriction,
-  // or exhausted quota) so the UI doesn't misleadingly say "add your API
-  // key" when one is already set - and either way we fall back to the
-  // browser's built-in voice so the interviewer still speaks out loud.
   useEffect(() => {
     let cancelled = false;
     setNeedsTapToPlay(false);
@@ -72,9 +61,6 @@ export default function InterviewScreen() {
   useEffect(() => {
     if (audioUrl && audioRef.current) {
       audioRef.current.play().catch(() => {
-        // Browsers block autoplay-with-sound until a user gesture happens
-        // on the page. Rather than silently fail, surface a "tap to hear"
-        // button so the voice assistant still reliably reads the question.
         setNeedsTapToPlay(true);
       });
     }
@@ -84,7 +70,6 @@ export default function InterviewScreen() {
     audioRef.current?.play().then(() => setNeedsTapToPlay(false)).catch(() => {});
   }
 
-  // Reset the code buffer each time a fresh coding question appears.
   useEffect(() => {
     if (isCodingRound) setCode("");
   }, [state?.current_question, isCodingRound]);

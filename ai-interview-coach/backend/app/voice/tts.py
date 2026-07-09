@@ -1,7 +1,3 @@
-"""
-Text-to-speech via the ElevenLabs REST API. Kept as a plain requests
-call (no SDK) to keep the dependency footprint small.
-"""
 import requests
 from app.config import ELEVENLABS_API_KEY, ELEVENLABS_VOICE_ID, ELEVENLABS_MODEL_ID
 

@@ -1,16 +1,3 @@
-"""
-Node functions for the interview graph.
-
-v3 fix: each turn is atomic (score + decide + generate-next happen as
-plain function calls inside ONE node) so a failure never leaves the
-round/question desynced from what the frontend displays.
-
-v5 fix: on top of that, session start and each turn now use ONE combined
-LLM call instead of two (see COMBINED_START_PROMPT / COMBINED_TURN_PROMPT
-in prompts.py). This roughly halves total LLM calls for a full
-interview, which matters directly for staying under the free tier's
-20 requests/minute ceiling.
-"""
 import logging
 from app.state import InterviewState
 from app.graph.llm import call_llm_json
@@ -227,8 +214,6 @@ def process_turn_node(state: InterviewState) -> dict:
     try:
         history.save_completed_interview({**state, **update})
     except Exception:
-        # History persistence is a nice-to-have - never let a disk/IO
-        # issue break the actual interview flow the user is waiting on.
         logger.exception("Failed to save completed interview to history")
 
     return update

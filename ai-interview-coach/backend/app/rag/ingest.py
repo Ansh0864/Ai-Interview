@@ -1,11 +1,3 @@
-"""
-Handles turning raw resume/JD uploads into:
-  1. A per-session Chroma vector store (for grounded retrieval during questioning)
-  2. LLM-generated structured summaries (used to steer question generation)
-
-Embeddings use a local sentence-transformers model so no extra API key
-is needed just to run RAG.
-"""
 import io
 from typing import Optional
 from pypdf import PdfReader

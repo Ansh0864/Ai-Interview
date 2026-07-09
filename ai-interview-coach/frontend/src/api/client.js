@@ -1,13 +1,7 @@
 import { getClientId } from "../utils/clientId.js";
 
-const BASE_URL = "http://localhost:8000";
+const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
 
-/**
- * FastAPI's `detail` can be either a plain string or, for rate-limit
- * errors, a structured object { message, retry_after_seconds }. This
- * normalizes both into a JS Error with an optional .retryAfterSeconds
- * so the UI can show a real countdown instead of a static message.
- */
 async function throwForResponse(res, fallbackMessage) {
   let detail = fallbackMessage;
   let retryAfterSeconds = null;
