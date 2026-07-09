@@ -4,7 +4,6 @@ export default function VoiceOrb({ mode = "idle" }) {
   const active = mode !== "idle";
   const color = mode === "listening" ? "#D9776B" : "#E8A33D";
   const label = mode === "speaking" ? "Speaking" : mode === "listening" ? "Listening" : "Voice ready";
-
   return (
     <div className="flex items-center gap-3">
       <div

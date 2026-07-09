@@ -3,7 +3,6 @@ function formatSection(title, lines) {
 }
 export function buildTranscriptMarkdown({ qaLog, report, resumeSummary, jdSummary, completedAt }) {
   const parts = [`# Interview Transcript\n`];
-
   if (completedAt) parts.push(`*Completed: ${new Date(completedAt).toLocaleString()}*\n`);
   if (resumeSummary) parts.push(`**Candidate background:** ${resumeSummary}\n`);
   if (jdSummary) parts.push(`**Role:** ${jdSummary}\n`);

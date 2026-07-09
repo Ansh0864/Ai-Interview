@@ -53,7 +53,7 @@ if not GROQ_API_KEYS and not GOOGLE_API_KEYS:
 HISTORY_FILE = os.getenv("HISTORY_FILE", "./data/history.json")
 
 # --- Voice (Phase 2) ---
-# Whisper runs locally via faster-whisper, so no API key needed for STT.
+# Whisper runs locally via faster-whisper, so no API key needed for STT
 WHISPER_MODEL_SIZE = os.getenv("WHISPER_MODEL_SIZE", "base")  # tiny/base/small/medium
 WHISPER_DEVICE = os.getenv("WHISPER_DEVICE", "cpu")
 

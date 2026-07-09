@@ -71,7 +71,6 @@ export default function PerformanceCharts({ qaLog }) {
           </LineChart>
         </ResponsiveContainer>
       </div>
-
       <div>
         <p className="text-xs font-mono uppercase tracking-wider text-muted mb-4">Average score by round</p>
         <ResponsiveContainer width="100%" height={180}>

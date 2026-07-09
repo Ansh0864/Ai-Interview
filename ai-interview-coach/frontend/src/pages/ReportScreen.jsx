@@ -12,7 +12,6 @@ export default function ReportScreen() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  
   const [report, setReport] = useState(location.state?.report || null);
   const [qaLog, setQaLog] = useState(location.state?.qaLog || []);
   const [meta, setMeta] = useState({

@@ -7,7 +7,6 @@ from app.config import WHISPER_MODEL_SIZE, WHISPER_DEVICE
 
 _model: Optional[WhisperModel] = None
 
-
 def get_model() -> WhisperModel:
     global _model
     if _model is None:

@@ -14,8 +14,6 @@ Return ONLY valid JSON with this exact shape, no markdown fences, no preamble:
 }}
 """
 
-# Combines what used to be two separate calls (summarize docs, then generate
-# question #1) into one - halves the API calls needed just to start a session.
 COMBINED_START_PROMPT = """You are an experienced technical interviewer preparing for a {round_label} round interview.
 
 RESUME:

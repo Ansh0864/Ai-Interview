@@ -3,7 +3,6 @@ from langgraph.checkpoint.memory import MemorySaver
 from app.state import InterviewState
 from app.graph.nodes import start_interview_node, process_turn_node, route_entry
 
-
 def build_interview_graph():
     graph = StateGraph(InterviewState)
 

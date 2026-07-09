@@ -12,7 +12,6 @@ class TTSError(Exception):
         super().__init__(message)
         self.status_code = status_code
 
-
 class TTSNotConfigured(Exception):
     """Raised specifically when no API key is set at all - distinct from
     TTSError so the frontend can tell 'you haven't set a key' apart from

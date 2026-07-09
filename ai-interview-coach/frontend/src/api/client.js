@@ -14,7 +14,7 @@ async function throwForResponse(res, fallbackMessage) {
       retryAfterSeconds = body.detail.retry_after_seconds ?? null;
     }
   } catch {
-    // response wasn't JSON - keep the fallback message
+    // response wasn't JSON - keep the fallback messag
   }
   const error = new Error(detail);
   error.retryAfterSeconds = retryAfterSeconds;

@@ -11,7 +11,6 @@ _lock = threading.Lock()
 def _ensure_dir():
     os.makedirs(os.path.dirname(HISTORY_FILE) or ".", exist_ok=True)
 
-
 def _read_all() -> list:
     if not os.path.exists(HISTORY_FILE):
         return []

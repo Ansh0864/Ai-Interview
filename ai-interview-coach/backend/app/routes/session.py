@@ -14,7 +14,6 @@ from app.voice.tts import synthesize_speech, TTSError, TTSNotConfigured
 
 router = APIRouter(prefix="/api/session", tags=["session"])
 
-
 class AnswerRequest(BaseModel):
     session_id: str
     answer: str

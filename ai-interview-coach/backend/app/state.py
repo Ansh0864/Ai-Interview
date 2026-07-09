@@ -43,7 +43,7 @@ class InterviewState(TypedDict, total=False):
     declared_language: Optional[str]  # e.g. "python" - only meaningful during the coding round
 
     # Previous-turn results shown in the UI (these were missing before,
-    # which is why the "/10" score never rendered)
+    # which is why the "/10" score never rendered))
     last_score: Optional[int]
     last_feedback: Optional[str]
     last_confidence_flags: List[str]

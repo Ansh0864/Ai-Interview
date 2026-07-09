@@ -13,7 +13,6 @@ from app import history
 
 logger = logging.getLogger("interview_coach.nodes")
 
-
 def _round_history_text(state: InterviewState) -> str:
     current_round = state["current_round"]
     lines = []

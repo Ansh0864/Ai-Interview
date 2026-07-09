@@ -11,7 +11,6 @@ async def list_history(x_client_id: str = Header(...)):
     there's no way to know whose history to return."""
     return history.list_summaries(x_client_id)
 
-
 @router.get("/{session_id}")
 async def get_history_record(session_id: str, x_client_id: str = Header(...)):
     """Full record (qa_log + final_report) for one completed interview -

@@ -16,7 +16,6 @@ export default function TiltCard({ children, className = "", maxTilt = 6 }) {
   function handleMouseLeave() {
     setTransform("rotateX(0deg) rotateY(0deg)");
   }
-
   return (
     <div style={{ perspective: "1200px" }}>
       <div

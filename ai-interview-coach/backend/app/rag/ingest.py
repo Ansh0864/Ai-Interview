@@ -8,7 +8,6 @@ from langchain_core.documents import Document
 
 _embeddings: Optional[HuggingFaceEmbeddings] = None
 
-
 def get_embeddings() -> HuggingFaceEmbeddings:
     global _embeddings
     if _embeddings is None:

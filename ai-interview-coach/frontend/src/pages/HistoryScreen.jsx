@@ -10,7 +10,6 @@ export default function HistoryScreen() {
   useEffect(() => {
     fetchHistoryList().then(setRecords).catch(setError);
   }, []);
-
   return (
     <div className="min-h-screen px-6 py-16 flex justify-center screen-enter">
       <Background3D />

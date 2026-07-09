@@ -12,7 +12,6 @@ export default function InterviewScreen() {
   const { sessionId } = useParams();
   const location = useLocation();
   const navigate = useNavigate();
-
   const [state, setState] = useState(location.state?.initial || null);
   const [answer, setAnswer] = useState("");
   const [code, setCode] = useState("");

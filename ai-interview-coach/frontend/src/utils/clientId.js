@@ -1,4 +1,3 @@
-
 const STORAGE_KEY = "interview_coach_client_id";
 
 export function getClientId() {

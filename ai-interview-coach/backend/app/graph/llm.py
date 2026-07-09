@@ -12,7 +12,6 @@ from app.config import GROQ_API_KEYS, GROQ_MODEL, GOOGLE_API_KEYS, GEMINI_MODEL
 
 logger = logging.getLogger("interview_coach.llm")
 
-
 class ModelUnavailableError(Exception):
     """Raised when a configured model/key is invalid for EVERY provider -
     retrying will never help here, unlike a genuine rate limit."""

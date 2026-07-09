@@ -6,7 +6,6 @@ const ROUNDS = [
 
 export default function RoundProgress({ currentRound, questionsAsked, maxQuestions }) {
   const currentIndex = ROUNDS.findIndex((r) => r.key === currentRound);
-
   return (
     <div className="w-full">
       <div className="flex gap-2">

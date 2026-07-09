@@ -15,7 +15,6 @@ export default function RateLimitNotice({ error }) {
   }, [remaining]);
 
   if (!normalized) return null;
-
   return (
     <div className="text-sm text-flag space-y-1">
       <p>{normalized.message}</p>

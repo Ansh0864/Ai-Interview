@@ -11,7 +11,6 @@ export const CODE_LANGUAGES = {
   cpp: { label: "C++", extension: cpp() },
   java: { label: "Java", extension: java() },
 };
-
 export default function CodeEditor({ value, onChange, language, onLanguageChange, disabled }) {
   return (
     <div className="rounded-md overflow-hidden border border-line">
