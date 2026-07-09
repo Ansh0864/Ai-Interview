@@ -14,6 +14,7 @@ Return ONLY valid JSON with this exact shape, no markdown fences, no preamble:
 }}
 """
 
+
 COMBINED_START_PROMPT = """You are an experienced technical interviewer preparing for a {round_label} round interview.
 
 RESUME:
@@ -22,10 +23,13 @@ RESUME:
 JOB DESCRIPTION:
 {jd_text}
 
+
 Relevant context retrieved from the candidate's resume/JD: {retrieved_context}
+
 
 Instructions for the {round_label} round:
 {round_instructions}
+
 
 Return ONLY valid JSON with this exact shape, no markdown fences, no preamble:
 {{
@@ -36,16 +40,22 @@ Return ONLY valid JSON with this exact shape, no markdown fences, no preamble:
 }}
 """
 
+
 QUESTION_GENERATION_PROMPT = """You are an experienced technical interviewer conducting a {round_label} round.
+
+
 
 Candidate background: {resume_summary}
 Role requirements: {jd_summary}
 Relevant context retrieved from the candidate's resume/JD: {retrieved_context}
 
+
 Conversation so far this round:
 {round_history}
 
+
 This is question #{question_number} of {max_questions} in the {round_label} round.
+
 
 Instructions for this round type:
 {round_instructions}
@@ -54,23 +64,32 @@ Ask ONE clear, specific interview question. Do not repeat a topic already covere
 Return ONLY the question text, nothing else - no numbering, no preamble.
 """
 
+
 FOLLOWUP_PROMPT = """You are an interviewer in a {round_label} round. The candidate just answered:
+
 
 Question: {current_question}
 Answer: {last_answer}
+
 
 The answer was somewhat vague, incomplete, or you want to probe deeper based on something specific they said.
 Ask ONE natural, specific follow-up question that digs into a detail from their actual answer.
 Return ONLY the follow-up question text, nothing else.
 """
 
+
 SCORING_PROMPT = """You are scoring a candidate's interview answer.
+
 
 Round: {round_label}
 Question: {question}
 Candidate's answer: {answer}
 
+
+
 Evaluate on: relevance, specificity/concrete examples, clarity, and (if coding round) technical correctness.
+
+
 
 Also flag confidence/communication issues if present, by looking for:
 - hedging language ("I think maybe", "I'm not sure but", "probably", excessive qualifiers)
@@ -78,7 +97,10 @@ Also flag confidence/communication issues if present, by looking for:
 - filler-heavy phrasing
 - avoidance of directly answering the question
 
+
 Return ONLY valid JSON, no markdown fences:
+
+
 {{
   "score": <integer 1-10>,
   "feedback": "2-3 sentences of specific, constructive feedback",
@@ -87,12 +109,16 @@ Return ONLY valid JSON, no markdown fences:
 }}
 """
 
+
 # Combines scoring + deciding-next-step + generating the next question into
 # ONE call (previously 2 separate calls per turn). The model produces both
 # a possible follow-up AND a possible fresh/next-round question in the same
 # response; Python then picks whichever one applies based on needs_followup
 # and round bookkeeping it already knows deterministically.
+
+
 COMBINED_TURN_PROMPT = """You are an interviewer conducting a {round_label} round.
+
 
 Candidate background: {resume_summary}
 Role requirements: {jd_summary}
@@ -103,7 +129,10 @@ Candidate's answer: {answer}
 Evaluate the answer on: relevance, specificity/concrete examples, clarity, and (if coding round) technical correctness.
 Also flag confidence/communication issues if present (hedging language, very short/vague answers, filler-heavy phrasing, avoidance).
 
+
+
 {next_step_instructions}
+
 
 Return ONLY valid JSON, no markdown fences, no preamble:
 {{
@@ -116,10 +145,14 @@ Return ONLY valid JSON, no markdown fences, no preamble:
 }}
 """
 
+
+
 LANGUAGE_CHECK_INSTRUCTIONS = """
 IMPORTANT: The candidate selected "{declared_language}" as their language for this code answer.
 This selection is a strict requirement, not a suggestion - the candidate must submit code written
 in exactly this language.
+
+
 
 STEP 1 - Is this actually code? Check whether the submission is real source code (function/method
 definitions, correct block structure, variable declarations, operators, etc.) as opposed to a
@@ -128,6 +161,8 @@ the array and check...") without ever writing actual syntax. A written explanati
 correct or well-reasoned, is NOT a substitute for code. If the submission is prose with no real
 code in it, cap the score at 2/10 and say so explicitly in the feedback.
 
+
+
 STEP 2 - Only if real code IS present: identify which language it is ACTUALLY written in by its
 syntax, keywords, and conventions - do not just trust the declared_language label. Rough tells:
 Python uses indentation-based blocks, `def`, `:`, no semicolons or curly braces. C++ uses
@@ -135,41 +170,55 @@ Python uses indentation-based blocks, `def`, `:`, no semicolons or curly braces.
 `public static void main`, explicit types, semicolons, curly braces. JavaScript/TypeScript uses
 `function`/`=>`, `let`/`const`/`var`, curly braces, optional semicolons.
 
+
+
 If the code you detect does NOT match "{declared_language}" (e.g. Python was selected but the
 code is written in C++ or Java syntax, or C++ was selected but the code is Python), this is a
 strict instruction-following failure regardless of how correct or elegant the logic is: cap the
 score at 3/10, and explicitly state in the feedback which language you actually detected versus
 which one was selected, and that they need to resubmit their answer in the correct language field.
 
+
 Only if the code is genuine AND its syntax correctly matches "{declared_language}" should you
 evaluate normally on correctness, edge cases, time/space complexity, and code quality.
 """
+
+
 
 NEXT_STEP_SAME_ROUND = """This is question #{question_number} of {max_questions} in the {round_label} round.
 If a follow-up isn't needed, the interview continues with a NEW question in the SAME {round_label} round.
 Round context so far:
 {round_history}
 
+
 Instructions for the {round_label} round:
 {round_instructions}"""
+
+
 
 NEXT_STEP_NEW_ROUND = """This was the LAST question of the {round_label} round.
 If a follow-up isn't needed, the interview moves on to the {next_round_label} round - "next_question" should be
 the OPENING question of that new round, not a continuation of {round_label}.
 
+
 Instructions for the {next_round_label} round:
 {next_round_instructions}"""
+
 
 NEXT_STEP_FINAL = """This was the LAST question of the FINAL round ({round_label}) - the interview is ending.
 If a follow-up isn't needed, set "next_question" to an empty string "" since there's nothing more to ask."""
 
+
 FINAL_REPORT_PROMPT = """You are compiling a final interview performance report.
+
 
 Candidate background: {resume_summary}
 Role: {jd_summary}
 
+
 Full Q&A log with scores:
 {qa_summary}
+
 
 Return ONLY valid JSON, no markdown fences:
 {{
@@ -185,6 +234,8 @@ Return ONLY valid JSON, no markdown fences:
   "final_verdict": "2-3 sentence overall hiring-readiness summary"
 }}
 """
+
+
 
 ROUND_INSTRUCTIONS = {
     "behavioral": "Ask about past experiences, teamwork, conflict resolution, ownership, and decision-making using a STAR-style prompt (e.g. 'Tell me about a time when...').",
@@ -203,6 +254,8 @@ ROUND_INSTRUCTIONS = {
         "the candidate's code will be read and evaluated for correctness and quality, not run."
     ),
 }
+
+
 
 ROUND_LABELS = {
     "behavioral": "Behavioral",

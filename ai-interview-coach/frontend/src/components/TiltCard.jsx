@@ -12,7 +12,6 @@ export default function TiltCard({ children, className = "", maxTilt = 6 }) {
     const y = (e.clientY - rect.top) / rect.height - 0.5;
     setTransform(`rotateX(${(-y * maxTilt).toFixed(2)}deg) rotateY(${(x * maxTilt).toFixed(2)}deg)`);
   }
-
   function handleMouseLeave() {
     setTransform("rotateX(0deg) rotateY(0deg)");
   }

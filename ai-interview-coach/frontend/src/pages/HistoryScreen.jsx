@@ -2,11 +2,9 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { fetchHistoryList } from "../api/client.js";
 import Background3D from "../components/Background3D.jsx";
-
 export default function HistoryScreen() {
   const [records, setRecords] = useState(null);
   const [error, setError] = useState(null);
-
   useEffect(() => {
     fetchHistoryList().then(setRecords).catch(setError);
   }, []);
@@ -28,16 +26,13 @@ export default function HistoryScreen() {
             + New interview
           </Link>
         </div>
-
         {error && <p className="text-sm text-flag">{error.message}</p>}
-
         {records && records.length === 0 && (
           <p className="text-muted">
             No completed interviews yet.{" "}
             <Link to="/" className="text-signal">Start one</Link> and it'll show up here once finished.
           </p>
         )}
-
         <div className="space-y-3">
           {records?.map((r) => (
             <Link

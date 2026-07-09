@@ -3,7 +3,6 @@ const ROUNDS = [
   { key: "hr", label: "HR" },
   { key: "coding", label: "Coding" },
 ];
-
 export default function RoundProgress({ currentRound, questionsAsked, maxQuestions }) {
   const currentIndex = ROUNDS.findIndex((r) => r.key === currentRound);
   return (

@@ -46,8 +46,6 @@ export default function Background3D() {
       scene.add(mesh);
       shapes.push(mesh);
     }
-
-    // Soft particle fiel
     const particleCount = 180;
     const positions = new Float32Array(particleCount * 3);
     for (let i = 0; i < particleCount; i++) {

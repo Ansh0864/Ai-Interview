@@ -34,7 +34,6 @@ export default function VoiceRecorder({ onRecordingComplete, disabled }) {
     clearInterval(timerRef.current);
     setRecording(false);
   }
-
   return (
     <button
       type="button"

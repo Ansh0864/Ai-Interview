@@ -35,6 +35,8 @@ class InterviewState(TypedDict, total=False):
     questions_asked_in_round: int
     max_questions_per_round: int
 
+
+
     # Turn-level working memory
     current_question: str
     is_followup: bool
@@ -42,17 +44,21 @@ class InterviewState(TypedDict, total=False):
     last_answer: str
     declared_language: Optional[str]  # e.g. "python" - only meaningful during the coding round
 
+
     # Previous-turn results shown in the UI (these were missing before,
     # which is why the "/10" score never rendered))
     last_score: Optional[int]
     last_feedback: Optional[str]
     last_confidence_flags: List[str]
 
+
     # History / results
     conversation: List[dict]  # [{"role": "interviewer"|"candidate", "content": str}]
     qa_log: List[QAEntry]
+
 
     # Control flow
     next_action: Literal["ask_followup", "next_question", "next_round", "finish"]
     finished: bool
     final_report: Optional[dict]
+    

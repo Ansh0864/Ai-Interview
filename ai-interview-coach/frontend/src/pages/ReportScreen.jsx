@@ -4,14 +4,12 @@ import PerformanceCharts from "../components/PerformanceCharts.jsx";
 import Background3D from "../components/Background3D.jsx";
 import { fetchHistoryRecord } from "../api/client.js";
 import { buildTranscriptMarkdown, downloadTextFile } from "../utils/transcript.js";
-
 export default function ReportScreen() {
   const location = useLocation();
   const { sessionId } = useParams();
   const [tab, setTab] = useState("overview");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-
   const [report, setReport] = useState(location.state?.report || null);
   const [qaLog, setQaLog] = useState(location.state?.qaLog || []);
   const [meta, setMeta] = useState({
@@ -19,7 +17,6 @@ export default function ReportScreen() {
     jdSummary: location.state?.jdSummary || "",
     completedAt: location.state?.completedAt || null,
   });
-
   useEffect(() => {
     if (report || !sessionId) return;
     setLoading(true);
@@ -41,11 +38,9 @@ export default function ReportScreen() {
     const markdown = buildTranscriptMarkdown({ qaLog, report, ...meta });
     downloadTextFile(`interview-transcript-${sessionId || "session"}.md`, markdown);
   }
-
   if (loading) {
     return <div className="min-h-screen flex items-center justify-center text-muted">Loading interview...</div>;
   }
-
   if (error || !report) {
     return (
       <div className="min-h-screen flex items-center justify-center text-muted">
@@ -53,7 +48,6 @@ export default function ReportScreen() {
       </div>
     );
   }
-
   return (
     <div className="min-h-screen px-6 py-16 flex justify-center screen-enter">
       <Background3D />
@@ -87,7 +81,6 @@ export default function ReportScreen() {
             ↓ Download transcript
           </button>
         </div>
-
         {tab === "overview" ? (
           <>
             <Section title="Strengths">
@@ -97,7 +90,6 @@ export default function ReportScreen() {
                 ))}
               </ul>
             </Section>
-
             <Section title="Areas to improve">
               <ul className="space-y-2">
                 {report.areas_to_improve?.map((s, i) => (
@@ -105,7 +97,6 @@ export default function ReportScreen() {
                 ))}
               </ul>
             </Section>
-
             <Section title="Round breakdown">
               <div className="space-y-3">
                 {Object.entries(report.round_breakdown || {}).map(([round, text]) => (
@@ -116,11 +107,9 @@ export default function ReportScreen() {
                 ))}
               </div>
             </Section>
-
             <Section title="Communication & confidence">
               <p className="text-sm text-muted leading-relaxed">{report.confidence_assessment}</p>
             </Section>
-
             <Section title="Verdict">
               <p className="text-sm text-ink leading-relaxed">{report.final_verdict}</p>
             </Section>
@@ -130,7 +119,6 @@ export default function ReportScreen() {
             <PerformanceCharts qaLog={qaLog} />
           </Section>
         )}
-
         <Link
           to="/"
           className="inline-block mt-6 bg-panel border border-line px-6 py-2.5 rounded-md text-sm font-medium hover:border-signal transition"
@@ -141,7 +129,6 @@ export default function ReportScreen() {
     </div>
   );
 }
-
 function TabButton({ active, onClick, children }) {
   return (
     <button
@@ -154,7 +141,6 @@ function TabButton({ active, onClick, children }) {
     </button>
   );
 }
-
 function Section({ title, children }) {
   return (
     <div className="mb-8 pb-8 border-b border-line last:border-0">

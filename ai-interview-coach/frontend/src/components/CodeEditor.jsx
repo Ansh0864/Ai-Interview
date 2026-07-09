@@ -4,7 +4,6 @@ import { python } from "@codemirror/lang-python";
 import { cpp } from "@codemirror/lang-cpp";
 import { java } from "@codemirror/lang-java";
 import { tokyoNight } from "@uiw/codemirror-theme-tokyo-night";
-
 export const CODE_LANGUAGES = {
   python: { label: "Python", extension: python() },
   javascript: { label: "JavaScript", extension: javascript() },

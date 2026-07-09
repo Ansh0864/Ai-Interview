@@ -25,9 +25,7 @@ export default function InterviewScreen() {
   const [needsTapToPlay, setNeedsTapToPlay] = useState(false);
   const [ttsIssue, setTtsIssue] = useState(null); 
   const audioRef = useRef(null);
-
   const isCodingRound = state?.current_round === "coding";
-
   function speakWithBrowserVoice(text) {
     if (!("speechSynthesis" in window) || !text) return;
     window.speechSynthesis.cancel(); 
@@ -68,11 +66,9 @@ export default function InterviewScreen() {
   function playQuestionAudio() {
     audioRef.current?.play().then(() => setNeedsTapToPlay(false)).catch(() => {});
   }
-
   useEffect(() => {
     if (isCodingRound) setCode("");
   }, [state?.current_question, isCodingRound]);
-
   if (!state) {
     return (
       <div className="min-h-screen flex items-center justify-center text-muted">
@@ -80,7 +76,6 @@ export default function InterviewScreen() {
       </div>
     );
   }
-
   async function processResult(data) {
     setLastResult({
       score: data.last_score,
@@ -93,7 +88,6 @@ export default function InterviewScreen() {
       navigate(`/report/${sessionId}`, { state: { report: data.final_report, qaLog: data.qa_log || [] } });
     }
   }
-
   async function handleTextSubmit(e) {
     e.preventDefault();
     const payload = isCodingRound ? code : answer;
@@ -109,7 +103,6 @@ export default function InterviewScreen() {
       setSubmitting(false);
     }
   }
-
   async function handleVoiceSubmit(blob) {
     setSubmitting(true);
     setError(null);
@@ -122,7 +115,6 @@ export default function InterviewScreen() {
       setSubmitting(false);
     }
   }
-
   return (
     <div className="min-h-screen flex flex-col items-center px-6 py-12 screen-enter">
       <Background3D />
@@ -132,9 +124,8 @@ export default function InterviewScreen() {
           questionsAsked={state.questions_asked_in_round}
           maxQuestions={state.max_questions_per_round}
         />
-
         <div className="mt-12">
-          {/* AI Assistant bar */}
+          {}
           <div className="flex items-center justify-between mb-4 bg-panel/70 backdrop-blur-sm border border-line rounded-lg px-4 py-3">
             <div className="flex items-center gap-2">
               <span className="font-mono text-xs uppercase tracking-wider text-signal">
@@ -165,12 +156,10 @@ export default function InterviewScreen() {
               />
             )}
           </div>
-
           <p className="font-display text-2xl md:text-3xl leading-snug mb-2">
             {state.current_question}
           </p>
           <div className="mb-8" />
-
           {lastResult && lastResult.score != null && (
             <div className="mb-8 p-4 rounded-md bg-panel border border-line">
               <div className="flex items-center justify-between mb-1">
@@ -199,9 +188,7 @@ export default function InterviewScreen() {
               )}
             </div>
           )}
-
           {isCodingRound ? (
-            // Coding round always uses the code editor — voice doesn't make sense for writing code.
             <form onSubmit={handleTextSubmit} className="space-y-4">
               <CodeEditor
                 value={code}

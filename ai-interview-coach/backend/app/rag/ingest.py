@@ -6,13 +6,17 @@ from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_core.documents import Document
 
+
+
 _embeddings: Optional[HuggingFaceEmbeddings] = None
+
 
 def get_embeddings() -> HuggingFaceEmbeddings:
     global _embeddings
     if _embeddings is None:
         _embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
     return _embeddings
+
 
 
 def extract_text_from_upload(filename: str, raw_bytes: bytes) -> str:
@@ -23,18 +27,26 @@ def extract_text_from_upload(filename: str, raw_bytes: bytes) -> str:
     return raw_bytes.decode("utf-8", errors="ignore")
 
 
+
 def build_session_vectorstore(session_id: str, resume_text: str, jd_text: str) -> Chroma:
     """
     Chunks resume + JD text and embeds them into an in-memory Chroma
     collection scoped to this session (collection name = session_id).
     """
+
+
     splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=80)
 
+
     docs = []
+
+
     for chunk in splitter.split_text(resume_text):
         docs.append(Document(page_content=chunk, metadata={"source": "resume"}))
+
     for chunk in splitter.split_text(jd_text):
         docs.append(Document(page_content=chunk, metadata={"source": "jd"}))
+
 
     vectorstore = Chroma.from_documents(
         documents=docs,
@@ -42,6 +54,8 @@ def build_session_vectorstore(session_id: str, resume_text: str, jd_text: str) -
         collection_name=f"session_{session_id}",
     )
     return vectorstore
+
+
 
 
 def retrieve_context(vectorstore: Chroma, query: str, k: int = 3, source_filter: Optional[str] = None) -> str:

@@ -2,9 +2,7 @@ import {
   LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid,
   Tooltip, ResponsiveContainer, Cell,
 } from "recharts";
-
 const ROUND_COLORS = { behavioral: "#E8A33D", hr: "#3FA796", coding: "#D9776B" };
-
 function CustomTooltip({ active, payload }) {
   if (!active || !payload?.length) return null;
   const d = payload[0].payload;
@@ -18,7 +16,6 @@ function CustomTooltip({ active, payload }) {
     </div>
   );
 }
-
 export default function PerformanceCharts({ qaLog }) {
   if (!qaLog?.length) return null;
 
@@ -28,7 +25,6 @@ export default function PerformanceCharts({ qaLog }) {
     round: e.round,
     question: e.question,
   }));
-
   const roundKeys = ["behavioral", "hr", "coding"];
   const roundAverages = roundKeys
     .map((round) => {
@@ -38,7 +34,6 @@ export default function PerformanceCharts({ qaLog }) {
       return { round, average: Math.round(avg * 10) / 10 };
     })
     .filter(Boolean);
-
   const flagCounts = {};
   qaLog.forEach((e) => {
     (e.confidence_flags || []).forEach((flag) => {

@@ -6,10 +6,14 @@ from app.graph.prompts import (
     NEXT_STEP_SAME_ROUND, NEXT_STEP_NEW_ROUND, NEXT_STEP_FINAL,
     LANGUAGE_CHECK_INSTRUCTIONS, ROUND_INSTRUCTIONS, ROUND_LABELS,
 )
+
+
 from app.rag import registry
 from app.rag.ingest import retrieve_context
 from app.config import MAX_QUESTIONS_PER_ROUND, MAX_FOLLOWUPS_PER_QUESTION
 from app import history
+
+
 
 logger = logging.getLogger("interview_coach.nodes")
 
@@ -27,6 +31,8 @@ def _build_final_report(state: InterviewState) -> dict:
         f"[{e['round'].upper()}] Q: {e['question']}\nA: {e['answer']}\nScore: {e['score']}/10\nFeedback: {e['feedback']}"
         for e in state.get("qa_log", [])
     )
+
+
     return call_llm_json(
         FINAL_REPORT_PROMPT.format(
             resume_summary=state.get("resume_summary", ""),
@@ -34,6 +40,7 @@ def _build_final_report(state: InterviewState) -> dict:
             qa_summary=qa_summary,
         )
     )
+
 
 
 def start_interview_node(state: InterviewState) -> dict:
@@ -46,6 +53,7 @@ def start_interview_node(state: InterviewState) -> dict:
     query = f"{round_key} interview relevant experience and background"
     retrieved = retrieve_context(vectorstore, query, k=3)
 
+
     result = call_llm_json(
         COMBINED_START_PROMPT.format(
             round_label=ROUND_LABELS[round_key],
@@ -55,6 +63,7 @@ def start_interview_node(state: InterviewState) -> dict:
             round_instructions=ROUND_INSTRUCTIONS[round_key],
         )
     )
+
 
     question = result.get("first_question", "Tell me about yourself and your background.")
 

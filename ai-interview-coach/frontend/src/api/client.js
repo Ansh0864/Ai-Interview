@@ -14,21 +14,18 @@ async function throwForResponse(res, fallbackMessage) {
       retryAfterSeconds = body.detail.retry_after_seconds ?? null;
     }
   } catch {
-    // response wasn't JSON - keep the fallback messag
   }
   const error = new Error(detail);
   error.retryAfterSeconds = retryAfterSeconds;
   error.status = res.status;
   throw error;
 }
-
 export async function startSession({ resumeFile, jdFile, jdText, clientId }) {
   const form = new FormData();
   form.append("resume", resumeFile);
   if (jdFile) form.append("jd", jdFile);
   if (jdText) form.append("jd_text", jdText);
   form.append("client_id", clientId ?? getClientId());
-
   const res = await fetch(`${BASE_URL}/api/session/start`, {
     method: "POST",
     body: form,
@@ -72,10 +69,7 @@ export async function fetchQuestionAudio(text) {
     body: JSON.stringify({ text }),
   });
   if (!res.ok) {
-    // Distinguish "key not configured" from an actual ElevenLabs error
-    // (bad key, quota, wrong voice/model ID) - previously both showed
-    // identically as "add ELEVENLABS_API_KEY", which was misleading
-    // whenever a key WAS present but something else was wrong.
+    
     let reason = "not_configured";
     let message = "Voice reading is off - ELEVENLABS_API_KEY isn't set on the backend.";
     try {
@@ -85,7 +79,7 @@ export async function fetchQuestionAudio(text) {
         message = body.detail.message;
       }
     } catch {
-      // non-JSON error body - keep the generic message
+    
     }
     return { url: null, reason, message };
   }

@@ -6,7 +6,6 @@ export function buildTranscriptMarkdown({ qaLog, report, resumeSummary, jdSummar
   if (completedAt) parts.push(`*Completed: ${new Date(completedAt).toLocaleString()}*\n`);
   if (resumeSummary) parts.push(`**Candidate background:** ${resumeSummary}\n`);
   if (jdSummary) parts.push(`**Role:** ${jdSummary}\n`);
-
   if (report) {
     parts.push(formatSection("Overall", [
       `**Score:** ${report.overall_score}/10`,
@@ -20,7 +19,6 @@ export function buildTranscriptMarkdown({ qaLog, report, resumeSummary, jdSummar
       "**Verdict:** " + (report.final_verdict || ""),
     ]));
   }
-
   const rounds = [...new Set((qaLog || []).map((e) => e.round))];
   for (const round of rounds) {
     const entries = qaLog.filter((e) => e.round === round);
@@ -35,7 +33,6 @@ export function buildTranscriptMarkdown({ qaLog, report, resumeSummary, jdSummar
     ]);
     parts.push(formatSection(round.charAt(0).toUpperCase() + round.slice(1) + " round", lines));
   }
-
   return parts.join("\n");
 }
 

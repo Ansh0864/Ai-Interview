@@ -12,13 +12,20 @@ def _ensure_dir():
     os.makedirs(os.path.dirname(HISTORY_FILE) or ".", exist_ok=True)
 
 def _read_all() -> list:
+
+
     if not os.path.exists(HISTORY_FILE):
         return []
+    
     try:
+
         with open(HISTORY_FILE, "r", encoding="utf-8") as f:
             return json.load(f)
+        
     except (json.JSONDecodeError, OSError):
         return []
+
+
 
 
 def save_completed_interview(state: dict) -> None:
@@ -43,11 +50,13 @@ def save_completed_interview(state: dict) -> None:
             json.dump(records, f, indent=2)
 
 
+
 def list_summaries(client_id: str) -> list:
     """Returns lightweight summaries (no full qa_log) for the history list
     view, newest first - ONLY for records belonging to this client_id."""
     records = [r for r in _read_all() if r.get("client_id") == client_id]
     summaries = [
+
         {
             "session_id": r["session_id"],
             "completed_at": r["completed_at"],
@@ -60,10 +69,13 @@ def list_summaries(client_id: str) -> list:
     return list(reversed(summaries))
 
 
+
+
 def get_full_record(session_id: str, client_id: str) -> Optional[dict]:
     """Only returns the record if it exists AND belongs to this client_id -
     previously any session_id would return its full transcript to anyone."""
     for r in _read_all():
         if r.get("session_id") == session_id and r.get("client_id") == client_id:
             return r
+        
     return None
