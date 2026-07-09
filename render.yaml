@@ -11,9 +11,9 @@ services:
         sync: false 
 
   # 2. The React Frontend
-  - type: static_site
+  - type: web          
     name: ai-interview-frontend
-    env: node
+    env: static        
     rootDir: frontend
     buildCommand: npm install && npm run build
     staticPublishPath: dist
