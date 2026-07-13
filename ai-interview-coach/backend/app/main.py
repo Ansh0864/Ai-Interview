@@ -14,11 +14,7 @@ allowed_origins = [
 ]
 
 # ALLOWED_ORIGIN_REGEX env var: a regex pattern for origins that can't be
-# listed exactly - mainly Vercel PREVIEW deployments, which get a new random
-# subdomain on every single deploy (e.g. ai-interview-nf9qavsy4-yourteam.vercel.app)
-# and would be impossible to keep updating in ALLOWED_ORIGINS by hand.
-# Example value covering every preview URL for one Vercel project:
-#   ALLOWED_ORIGIN_REGEX=https://ai-interview-.*-iamansh86-8136s-projects\.vercel\.app
+# listed exactly - mainly Vercel PREVIEW deployments
 allowed_origin_regex = os.getenv("ALLOWED_ORIGIN_REGEX") or None
 
 app.add_middleware(
@@ -32,7 +28,6 @@ app.add_middleware(
 
 app.include_router(session.router)
 app.include_router(history.router)
-
 
 @app.get("/")
 def health_check():
