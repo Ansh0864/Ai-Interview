@@ -31,7 +31,7 @@ def get_embeddings() -> GoogleGenerativeAIEmbeddings:
                 "add at least one Google API key to your environment."
             )
         _embeddings = GoogleGenerativeAIEmbeddings(
-            model="models/text-embedding-004", google_api_key=GOOGLE_API_KEYS[0]
+            model="models/embedding-001", google_api_key=GOOGLE_API_KEYS[0]
         )
     return _embeddings
 
